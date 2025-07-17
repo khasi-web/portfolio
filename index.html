@@ -577,10 +577,34 @@
      <!-- Add router.js here -->
     <script src="router.js"></script>
 
-     <!-- Background Music -->
-    <audio id="bgm" loop>
-      <source src="music/Sappheiros - Dawn.mp3" type="audio/mpeg">
-    </audio>
+    <!-- Background Music -->
+<audio id="bgm" loop preload="auto">
+  <source src="music/Sappheiros - Dawn.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<button id="bgm-toggle" class="fixed bottom-8 right-8 z-50 bg-accent text-black px-4 py-2 rounded-full shadow-lg hover:bg-purple transition-all duration-300">
+  Play Music
+</button>
+
+<script>
+  const bgm = document.getElementById('bgm');
+  const bgmToggle = document.getElementById('bgm-toggle');
+  bgm.volume = 0.5;
+
+  bgmToggle.addEventListener('click', () => {
+    if (bgm.paused) {
+      bgm.play().then(() => {
+        bgmToggle.textContent = 'Pause Music';
+      }).catch(err => {
+        console.error("Audio playback failed:", err);
+      });
+    } else {
+      bgm.pause();
+      bgmToggle.textContent = 'Play Music';
+    }
+  });
+</script>
 
     <!-- Footer -->
     <footer class="glass py-8 border-t border-white/10">
